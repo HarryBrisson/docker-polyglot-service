@@ -20,8 +20,11 @@
 # Office 888, Montreal (Quebec) Canada
 # H2W 1Y5
 
+import json
+
 from bottle import request, route, run, template
 from polyglot.detect import Detector
+from polyglot.text import Text
 
 @route('/detect')
 def detect():
@@ -34,5 +37,12 @@ def detect():
     conf = detector.language.confidence
     read = detector.language.read_bytes
     return template(out, locl=locl, conf=conf, read=read)
+
+@route('/tokenizer')
+def tokenizer():
+    trimmed = request.query.q.strip()
+    query = (trimmed[:4096]) if len(trimmed) > 4096 else trimmed
+    words = Text(query).words
+    return(json.dumps(words))
 
 run(host='0.0.0.0', port=80, quiet=True)
