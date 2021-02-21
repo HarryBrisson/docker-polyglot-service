@@ -14,11 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Victor Yap <vyap@turbulent.ca>
-# c/o Turbulent Media inc.
-# 3981 Saint-Laurent Boulevard
-# Office 888, Montreal (Quebec) Canada
-# H2W 1Y5
 
 import json
 
