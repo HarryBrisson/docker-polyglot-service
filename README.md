@@ -9,6 +9,8 @@ A micro service for small natural language processing, powered by Polyglot.
 
 `docker build -t polyglot .`
 
-`docker run -dp 3000:80 polyglot`
+making available on port 80 allows for http traffic
+(if using aws ec2 instance, traffic must also be allowed on the port)
+`docker run -dp 80:80 polyglot`
 
 
