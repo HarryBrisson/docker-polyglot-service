@@ -20,6 +20,7 @@ import json
 from bottle import request, route, run, template
 from polyglot.detect import Detector
 from polyglot.text import Text
+from polyglot.transliteration import Transliterator
 
 @route('/detect')
 def detect():
@@ -33,11 +34,24 @@ def detect():
     read = detector.language.read_bytes
     return template(out, locl=locl, conf=conf, read=read)
 
+
 @route('/tokenizer')
 def tokenizer():
     trimmed = request.query.q.strip()
     query = (trimmed[:4096]) if len(trimmed) > 4096 else trimmed
     words = Text(query).words
     return(json.dumps(words))
+
+
+@route('/transliteration')
+def transliteration():
+    q = request.query.q.strip()
+    source = request.query.source.strip()
+    target = request.query.target.strip()
+    transliterator = Transliterator(source_lang=source, target_lang=target)
+    print(transliterator.transliterate(q))
+    words = transliterator.transliterate(q)
+    return(json.dumps(words))
+
 
 run(host='0.0.0.0', port=80, quiet=True)
