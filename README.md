@@ -18,3 +18,7 @@ I set up a crontab to restart the container every day because I was having issue
 
 `crontab -e`
 `0 */6 * * * docker restart polyglot_container`
+
+
+To get into python inside the container, you can use the following command.
+`docker run -ti polyglot python`
